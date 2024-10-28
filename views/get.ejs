@@ -1,0 +1,12 @@
+<%- include("partials/header.ejs") %>
+    <div class="body dummy2">
+        <form method="post" action="jwt">
+        <!-- <form method="post" action="home"> -->
+            <label for="username" id="username">UserName:</label>
+            <input type="text" id="username" name="username" value="<%= locals.username %>"><br><br>
+            <label for="password" id="password">Password:</label>
+            <input type="text" id="password" name="password"><br><br>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+<%- include("partials/footer.ejs") %>

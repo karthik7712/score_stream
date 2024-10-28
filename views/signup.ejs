@@ -1,0 +1,19 @@
+<%- include("partials/header.ejs") %>
+    <div class="body dummy3">
+        <form method="post" action="signin" >
+            <label for="FirstName" id="FirstName" >First Name:</label>
+            <input type="text" id="FirstName" name="FirstName"><br><br>
+            <label for="LastName" id="LastName" >Last Name:</label>
+            <input type="text" id="LastName" name="LastName"><br><br>
+            <label for="Mobile_number" id="Mobile_number" >Mobile Number:</label>
+            <input type="text" id="Mobile_number" name="Mobile_number"><br><br>
+            <label for="email" id="email" >Email:</label>
+            <input type="text" id="email" name="email"><br><br>
+            <label for="username" id="username" >UserName:</label>
+            <input type="text" id="username" name="username" value="<%= locals.username%>"><br><br>
+            <label for="password" id="password">Password:</label>
+            <input type="password" id="pass" name="password" minlength="8" required />
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+<%- include("partials/footer.ejs") %>

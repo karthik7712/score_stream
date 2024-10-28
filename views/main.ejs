@@ -1,0 +1,90 @@
+<%- include("partials/header.ejs") %>
+    <div class="body dummy4">
+        <div class="greeting">
+            <h3>Hey! Great to see you.. Choose a sport to get details</h3>
+        </div>
+        <div class="search">
+            <form method="post" action="/find">
+                <label for="sports">Choose a sport:</label>
+                <select name="sports" id="sports">
+                    <option value="Football">Football</option>
+                    <option value="Cricket">Cricket</option>
+                    <option value="F1">F1</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- <div class="favorites">
+            <p>user favorite results</p>
+            <p>if no favorites -> suggest some</p>
+        </div> -->
+        <div class="results">
+            <% if (!locals.matches || locals.matches.length === 0) { %> 
+                <p>There are no Live <%= type %> matches</p>
+            <% } else { %>
+                <p>Today's <%= type %> Matches: </p>
+                <% let i = 1; %>
+                <br></br>
+                <% matches.forEach(element => { %>  
+                        <div class="element">
+                            <p><%= element.name %></p>
+                            <p>
+                                <%= element.teamInfo[0].name %>
+                                vs
+                                <%= element.teamInfo[1].name %> 
+                            </p>
+                            <p>Status: <%= element.status %></p> 
+                            <p>Venue: <%= element.venue %></p> 
+    
+                            <% if (element.score && element.score.length > 0) { %>
+                                <p>Score: </p>
+                                <% element.score.forEach(score => { %>
+                                    <p><%= score.inning %>: <%= score.r %>/<%= score.w %> in <%= score.o %> overs</p>
+                                <% }) %>
+                            <% } %>
+                        </div>
+                <% }); %>
+            <% } %>
+        </div>
+        
+    </div>
+
+    <script>
+        // Define the leagues object
+        const leagues = {
+            "Football": ['fifa', 'laliga', 'premier league', 'uefa champions league', 'serie a', 'bundesliga'],
+            "Cricket": ['icc odi world cup', 'icc t20 world cup', 'icc test championship', 'ipl', 'bbl', 'sa20', 'cpl'],
+            "F1": ['f1 world championship']
+        };
+
+        // Get the sports and leagues dropdown elements
+        const sportsDropdown = document.getElementById('sports');
+        const leaguesDropdown = document.getElementById('leagues');
+
+        // Function to populate leagues dropdown based on selected sport
+        function updateLeagues() {
+            // Clear the leagues dropdown
+            leaguesDropdown.innerHTML = '';
+
+            // Get the selected sport
+            const selectedSport = sportsDropdown.value;
+
+            // Get the leagues for the selected sport
+            const selectedLeagues = leagues[selectedSport];
+
+            // Populate the leagues dropdown
+            selectedLeagues.forEach(league => {
+                const option = document.createElement('option');
+                option.value = league;
+                option.textContent = league;
+                leaguesDropdown.appendChild(option);
+            });
+        }
+
+        // Add event listener to sports dropdown
+        sportsDropdown.addEventListener('change', updateLeagues);
+
+        // Initialize leagues dropdown based on the initial sport selection
+        updateLeagues();
+    </script>
+<%- include("partials/footer.ejs") %>
